@@ -1,7 +1,7 @@
 # DNF_GM_Tool
 DNF GM网页管理系统
 
-#### 已停止维护更新
+#### 本项目自wubin1998/DNF_GM_Tool
 
 ## 安装环境
 
