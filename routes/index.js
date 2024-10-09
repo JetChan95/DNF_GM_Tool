@@ -24,10 +24,20 @@ router.route('/login')
 })
 .post(LoginController.login)
 
+// GM注册
+router.route('/gmregister')
+.get((req, res) => {
+  if (!res.locals.isReg) return res.redirect('/login')
+  res.render("session/gmregister", {
+    title: "注册"
+  })
+})
+.post(RegisterController.register)
+
 // 注册
 router.route('/register')
 .get((req, res) => {
-  if (!res.locals.isReg) return res.redirect('/login')
+  // if (!res.locals.isReg) return res.redirect('/login')
   res.render("session/register", {
     title: "注册"
   })
@@ -87,6 +97,8 @@ router.delete("/account", AccountController.delete)
 router.get('/role', (req, res, next) => {
   res.render("account/role", { title: "角色选择" })
 })
+
+router.get("/vip/give", AccountController.give_vip)
 
 router.get('/role/select', AccountController.role_select)
 

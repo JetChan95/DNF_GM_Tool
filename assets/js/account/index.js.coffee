@@ -17,6 +17,8 @@ class Index extends Common
         
     $(document).on 'click', '.js-login', (event) => @login event
 
+    $(document).on 'click', '.js-vip', (event) => @giveVip(event)
+
   tableRender: () ->
     @table.render
       elem: '#account_table'
@@ -35,11 +37,11 @@ class Index extends Common
           field: 'type'
           title: '权限'
           templet: (i) ->
-            if i.qq is "GM_master"
+            if i.VIP is "GM_master"
               return "GM"
-            if i.qq is "GM_vip"
+            if i.VIP is "GM_vip"
               return "VIP"
-            if i.qq is "" or not i.qq
+            if i.VIP is "" or not i.VIP
               return "普通"
         },
         {
@@ -66,6 +68,8 @@ class Index extends Common
           if res.code is 200
             layer.msg res.msg, icon: 1
             layui.table.reload("account_table")
+          else if res.code is -1
+            layer.msg res.msg, icon: 2
 
   search: () ->
     account = $('.js-account').val()
@@ -84,5 +88,21 @@ class Index extends Common
           return location.href = ""
         layer.msg res.msg
 
+  giveVip: (event) -> 
+    _index = $(event.target).parents('tr').attr('data-index')
+    layer.confirm "是否升级VIP?", (index) => 
+      uid = @datas[_index].UID
+      load = layer.load(2)
+      layer.close index
+      datas = 
+        uid: uid
+      $.get '/vip/give', datas, (res) ->
+          layer.closeAll()
+          console.log(res)
+          if res.code is 200
+            layer.msg res.msg, icon: 1
+            layui.table.reload("account_table")
+          else if res.code is -1
+            layer.msg res.msg, icon: 2
 i = new Index
 i.init()

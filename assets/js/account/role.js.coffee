@@ -46,7 +46,15 @@ class Role extends Common
       role_name: role_name, (res) ->
         location.href = ""
   
-    
+  deletRole: (event) ->
+    index = $(event.target).parents('tr').attr('data-index')
+    mid = @datas[index].charac_no
+    role_name = @datas[index].charac_name
+
+    $.get "/role/select", 
+      mid: mid
+      role_name: role_name, (res) ->
+        location.href = ""    
 
 i = new Role
 i.init()

@@ -2,7 +2,7 @@ class Register
   constructor: () ->
     
   init: () ->
-    $('.js-register-btn').on 'click', => @clickRegister()
+    $('.js-gmregister-btn').on 'click', => @clickRegister()
 
   
   clickRegister: () ->
@@ -10,7 +10,7 @@ class Register
       account: $('input[name="account"]').val()
       password: $('input[name="password"]').val()
       re_password: $('input[name="re_password"]').val()
-      role: ''
+      role: 'GM_master'
     
     if not datas.account
       return layer.msg "请输入账号", icon: 7
@@ -21,7 +21,7 @@ class Register
       return layer.msg "输入密码不一致，请重新输入", icon: 7
 
     load = layer.load(2)
-    $.post "/register", datas, (res) =>
+    $.post "/register", datas, (res) ->
       layer.close load
       if res.code is 200
         return layer.alert res.msg,

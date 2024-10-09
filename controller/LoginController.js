@@ -5,7 +5,7 @@ module.exports = {
   login: (req, res) => {
     let datas = req.body;
 
-    let sql = `select UID,accountname,password,qq from d_taiwan.accounts where accountname='${datas.account}' and password='${md5(datas.password)}' and qq='GM_master' limit 1`;
+    let sql = `select UID,accountname,password,VIP from d_taiwan.accounts where accountname='${datas.account}' and password='${md5(datas.password)}' and vip in ('GM_vip', 'GM_master') limit 1`;
     
     db(sql).then( result => {
       if (result.length <= 0) {
@@ -17,6 +17,7 @@ module.exports = {
 
       req.session.account = result[0].accountname;
       req.session.uid = result[0].UID;
+      req.session.role = result[0].VIP;
 
       return res.json({
         code: 200,
@@ -29,7 +30,7 @@ module.exports = {
   check_account: (req, res) => {
     let datas = req.query;
 
-    let sql = `select UID,accountname,password,qq from d_taiwan.accounts where UID='${datas.uid}' limit 1`;
+    let sql = `select UID,accountname,password,VIP from d_taiwan.accounts where UID='${datas.uid}' limit 1`;
     
     
     db(sql).then( result => {

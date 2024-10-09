@@ -31,12 +31,14 @@ function fashion(params) {
 // 充值SP
 function SP(params) {
   let sql = `update taiwan_cain_2nd.skill set remain_sp=(remain_sp+${params.num}) where charac_no=${params.mid}`;
+  // let sql = `update taiwan_cain_2nd.skill set remain_sp_2nd=(remain_sp_2nd+${params.num}) where charac_no=${params.mid}`;
   return sql;
 }
 
 // 充值TP
 function TP(params) {
-  let sql = `update taiwan_cain_2nd.skill set remain_sfp_2nd=(remain_sfp_2nd+${params.num}) where charac_no=${params.mid}`
+  let sql = `update taiwan_cain_2nd.skill set remain_sfp_1st=(remain_sfp_1st+${params.num}) where charac_no=${params.mid}`
+  // let sql = `update taiwan_cain_2nd.skill set remain_sfp_2nd=(remain_sfp_2nd+${params.num}) where charac_no=${params.mid}`
   return sql;
 }
 
