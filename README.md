@@ -7,6 +7,9 @@ DNF GM网页管理系统
 
 需要nodejs环境，下载[nodejs](https://nodejs.org/en/)
 
+## 配置
+配置db/config.js文件
+
 ## 使用
 安装好nodejs后，进入项目目录`./DNF_GM_Tool`
 
